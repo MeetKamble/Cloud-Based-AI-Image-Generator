@@ -6,7 +6,7 @@ import uuid
 app = Flask(__name__)
 
 # Your API key and endpoint
-API_KEY = 'sk-wrYs1WxlVsrvhnEgjz1GRohvnDy0cdnyFAOlXiHgMbneZLyr'
+API_KEY = 'sk-ORNsq6Vbptau1LTSWqtXewVEHzVsqAKVccPolIgOiSSiuqap'
 API_URL = 'https://api.stability.ai/v2beta/stable-image/generate/sd3'
 
 # Secret key for sessions
