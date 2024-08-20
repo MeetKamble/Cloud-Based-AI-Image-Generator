@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="blurred-overlay"></div>
+        <div class="TextArea">
+            <h1>AI IMAGE GENERATOR</h1>
+            <p>powered by Stable Diffusion</p>
+        </div>
+    </div>
+    <div class="ImageGenerate">
+        <form id="generateForm" method="post">
+            <input type="text" id="prompt" name="prompt" placeholder="DESCRIBE YOUR IMAGE" required>
+            <button type="submit" id="GenButton">Generate Image</button>
+        </form>
+    </div>
+    <div id="loadingScreen" class="loading-screen">
+        <div class="spinner"></div>
+        <p>Generating Image...</p>
+    </div>
+
+    {% if image_data %}
+        <div class="card-container">
+            {% for image_url, prompt in image_data %}
+                <div class="card" data-image-url="{{ url_for('static', filename=image_url) }}" data-download-url="{{ url_for('download', image_path=image_url) }}">
+                    <img src="{{ url_for('static', filename=image_url) }}" alt="Generated Image">
+                    <div class="card-body">
+                        <p class="card-text">{{ prompt }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="download-info">
+        <p>Click on the card to download</p>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

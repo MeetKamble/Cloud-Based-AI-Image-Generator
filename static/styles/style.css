@@ -1,0 +1,362 @@
+html {
+    height: 100%;
+    background: linear-gradient(to bottom, #2B2B2B, #191919); /* Gradient on html for full coverage */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%; /* Ensures body height is at least 100% of the viewport height */
+    background: inherit; /* Inherits the gradient background from html */
+    font-family: 'Frutiger', sans-serif;
+}
+
+
+.header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh; /* Responsive height */
+    width: 100%;
+    font-family: 'Frutiger', sans-serif;
+    color: white;
+    background-image: url('/static/Design/Anime.jpeg'); /* Path to your background image */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents image from repeating */
+}
+
+.header::before {
+    content: ""; /* Required for pseudo-elements */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/Design/Anime.jpeg'); /* Same background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(10px); /* Adjust blur radius for glow effect */
+    opacity: 0.5; /* Adjust opacity to control the intensity of the glow */
+    z-index: 0; /* Ensure the glow is behind the content */
+}
+
+.blurred-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.27); /* Optional translucent overlay */
+    backdrop-filter: blur(10px); /* Applies the blur effect */
+    z-index: 1; /* Places it above the background image but below the content */
+}
+
+.TextArea {
+    position: relative;
+    padding-left: 1%;  /* Further reduced padding */
+    padding-right: 1%;
+    background-color: rgba(0, 0, 0, 0.27);
+    border-radius: 31px;
+    text-align: center;
+    z-index: 2;
+}
+
+.header h1 {
+    font-size: 2.5vw; /* Adjusted for smaller size */
+    font-weight: bold;
+    color: #FFE500;
+    margin-bottom: 0;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header p {
+    font-size: 1vw; /* Adjusted for smaller size */
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Media queries for better responsiveness */
+@media (max-width: 1200px) {
+    .header h1 {
+        font-size: calc(1.5rem + 1.5vw);
+    }
+
+    .header p {
+        font-size: calc(1rem + 0.75vw);
+    }
+
+    .TextArea {
+        padding: 1.5em;
+    }
+}
+
+@media (max-width: 900px) {
+    .header h1 {
+        font-size: calc(1.5rem + 1.25vw);
+    }
+
+    .header p {
+        font-size: calc(1rem + 0.5vw);
+    }
+
+    .TextArea {
+        padding: 2em;
+    }
+}
+
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: calc(1.5rem + 1vw);
+    }
+
+    .header p {
+        font-size: calc(1rem + 0.25vw);
+    }
+
+    .TextArea {
+        padding: 2.5em;
+    }
+}
+
+.ImageGenerate {
+    margin-top: 5em; /* Responsive margin */
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+}
+form{
+    width: auto;
+}
+
+#prompt{
+    width: 450px;
+    height: 70px;
+    padding-left: 5px;
+    margin-right: 2vh;
+    color: black;
+    background-color: white;
+    border: 3px solid #7E7E7E; /* Remove the border */
+    outline: none;
+    font-size: 30px;
+    border-radius: 8px;
+    font-family: 'Frutiger', sans-serif;
+}
+
+#GenButton{
+    width: 300px;
+    height: 70px;
+    font-size: 30px;
+    background-color: #FF004D;
+    color: white;
+    font-family: 'Frutiger', sans-serif;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer; /* Shows a pointer cursor on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#GenButton:hover {
+    transform: translateY(-5px); /* Moves the button up on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Adds a deeper shadow on hover */
+    background-color: #cf0240;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 2em; /* Responsive margin */
+}
+
+#promptText {
+    color: white;
+}
+
+/* CSS for the loading screen */
+.loading-screen {
+    display: none; /* Hidden by default */
+    position: relative;
+    margin: 2em 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-style: 'Frutiger', sans-serif;
+}
+
+.loading-screen .spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1); /* Light grey */
+    border-left: 8px solid #FF004D; /* Red color */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.loading-screen p {
+    margin-top: 1em;
+    font-size: 1.2em;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1em; /* Responsive gap */
+    margin-top: 3em;
+}
+
+.card {
+    background-color: white;
+    border-radius: 31px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Adjust this as needed */
+    max-width: 400px; /* Adjust this as needed */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Media query for screens larger than 1200px */
+@media (min-width: 1200px) {
+    .card {
+        width: 45%; /* Two cards per row on large screens */
+        max-width: 400px; /* Larger maximum width */
+    }
+}
+
+/* Media query for screens between 900px and 1200px */
+@media (min-width: 900px) and (max-width: 1200px) {
+    .card {
+        width: 45%; /* Two cards per row on medium screens */
+        max-width: 350px; /* Medium maximum width */
+    }
+}
+
+/* Media query for screens smaller than 900px */
+@media (max-width: 900px) {
+    .card {
+        width: 100%; /* Full width on small screens */
+        max-width: none; /* No maximum width */
+    }
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background-color: rgb(251, 84, 47);
+}
+
+.card:hover .card-text {
+    color: white;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 1em; /* Responsive padding */
+}
+
+.card-text {
+    font-size: 1rem; /* Responsive font size */
+    color: #333;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.card .download-link {
+    display: block;
+    margin-top: 1em;
+    text-align: center;
+    color: #FF004D;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.card .download-link:hover {
+    text-decoration: underline;
+}
+
+.download-info {
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    margin-top: 10em;
+    margin: 2em 0;
+    padding: 1em;
+    border-radius: 8px; /* Optional rounded corners */
+    font-family: 'Frutiger', sans-serif;
+}
+.Preview-Image{
+    display: block;
+    width: 25%;
+    margin: 50px auto;
+    border: 4px solid #FF004D;
+}
+.Preview-Image-Info{
+    color: white;
+    text-align: center;
+    font-family: 'Frutiger', sans-serif;
+    font-size: 20px;
+}
+.download-container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+}
+/* Style for buttons */
+.download-button, .back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 30px;
+    color: white;
+    background-color: #FF004D; /* Green background for download button */
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Frutiger', sans-serif;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.download-button:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    background-color: #cf0240;
+    transform: translateY(-5px);
+}
+
+.back-button {
+    background-color: #008CBA; /* Blue background for back button */
+}
+
+.back-button:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    background-color: #007bb5;
+    transform: translateY(-5px);
+}
+#before-preview-image{
+    color: white;
+    font-family: 'Frutiger', sans-serif;
+}
+
+@font-face {
+    font-family: 'Frutiger'; /* Replace with your chosen name for the font */
+    src: url('/Design/Font/Frutiger.ttf') format('truetype'); /* Adjust path and format as needed */
+    font-weight: normal; /* Define the weight of the font (e.g., normal, bold) */
+    font-style: normal; /* Define the style of the font (e.g., normal, italic) */
+}

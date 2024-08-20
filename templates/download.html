@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="blurred-overlay"></div>
+        <div class="TextArea">
+            <h1>AI IMAGE GENERATOR</h1>
+            <p>powered by Stable Diffusion</p>
+        </div>
+    </div>
+    <div class="download-container">
+        <h1 id="before-preview-image">YOUR IMAGE IS READY TO BE DOWNLOADED</h1>
+        <img src="{{ url_for('static', filename=image_path) }}" alt="Generated Image" class="Preview-Image">
+        <p class="Preview-Image-Info">1024 x 1024</p>
+        <button id="downloadBtn" class="download-button" data-image-path="{{ url_for('static', filename=image_path) }}">DOWNLOAD IMAGE</button>
+        <br>
+        <button id="backBtn" class="back-button" data-homepage-url="{{ url_for('index') }}">CANCEL</button>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
